@@ -36,7 +36,7 @@ limitations under the License.
  *
  * ------------------------------------------------------------------------
 */
-define('EE_CORE_VERSION_REQUIRED', '4.3.0.p');
+define('EE_CORE_VERSION_REQUIRED', '4.10.10.p');
 define('HCA_PROGRAM_ROSTER_VERSION', '1.0');
 define('HCA_PROGRAM_ROSTER_PLUGIN_FILE', __FILE__);
 
@@ -60,11 +60,10 @@ function load_hca_program_roster_class()
         add_action('admin_notices', 'hca_program_roster_activation_error');
         return;
     }
-    // todo: remove version check since this has been added to later versions of register_addon in EE core
     if (class_exists('EE_Addon')) {
         // hca_program_roster_version
         require_once(plugin_dir_path(__FILE__) . 'HcaProgramRoster_Addon.class.php');
-        EE_Calendar::register_addon();
+        HcaProgramRoster_Addon::register_addon();
     } else {
         add_action('admin_notices', 'hca_program_roster_activation_error');
     }

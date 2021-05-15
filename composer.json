@@ -1,8 +1,7 @@
 {
   "name": "adamcin/hca-eea-program-roster",
   "description": "description",
-  "minimum-stability": "stable",
-  "license": "proprietary",
+  "license": "apache-2.0",
   "authors": [
     {
       "name": "Mark Adamcin",
@@ -12,16 +11,17 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/adamcin/hca-eea-program-roster"
+      "url": "https://github.com/eventespresso/ee-coding-standards"
     }
   ],
   "require-dev": {
     "eventespresso/ee-coding-standards": "dev-master",
-    "roave/security-advisories": "dev-master"
+    "roave/security-advisories": "dev-master",
+    "phpunit/phpunit": "^7"
   },
   "require": {
     "composer/installers": "~1.0",
-    "php": ">=5.5"
+    "php": ">=7.3"
   },
   "scripts": {
     "config-eventespressocs": [

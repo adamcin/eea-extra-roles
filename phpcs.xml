@@ -12,7 +12,7 @@
 
     <!-- specific rule exclusions per file -->
     <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
-        <exclude-pattern>espresso_calendar.php</exclude-pattern>
+        <exclude-pattern>hca-eea-program-roster.php</exclude-pattern>
     </rule>
 
     <rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
