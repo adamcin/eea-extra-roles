@@ -1,0 +1,35 @@
+{
+  "name": "adamcin/hca-eea-program-roster",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Mark Adamcin",
+      "email": "adamcin@gmail.com"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/adamcin/hca-eea-program-roster"
+    }
+  ],
+  "require-dev": {
+    "eventespresso/ee-coding-standards": "dev-master",
+    "roave/security-advisories": "dev-master"
+  },
+  "require": {
+    "composer/installers": "~1.0",
+    "php": ">=5.5"
+  },
+  "scripts": {
+    "config-eventespressocs": [
+      "\"vendor/bin/phpcs\" --config-set installed_paths ../../../vendor/wp-coding-standards/wpcs,../../../vendor/wimg/php-compatibility,../../../vendor/eventespresso/ee-coding-standards",
+      "\"vendor/bin/phpcs\" --config-set default_standard EventEspresso"
+    ],
+    "lint": "vendor/bin/phpcs",
+    "lint:skip-warnings": "vendor/bin/phpcs -n",
+    "lint:fix": "vendor/bin/phpcbf"
+  }
+}

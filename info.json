@@ -1,0 +1,24 @@
+{
+  "versionFile": "hca-eea-program-roster.php",
+  "slug": "hca-eea-program-roster",
+  "name": "HCA Program Roster",
+  "wpi18nJsPotFilePath": ".\/languages\/ee-js.pot",
+  "releaseFilesRemove": [
+    "src\/tests\/**",
+    "src\/acceptance_tests\/**",
+    "src\/info.json",
+    "src\/.travis.yml",
+    "src\/.github\/**",
+    "src\/assets\/src\/**",
+    "src\/eslint\/**",
+    "src\/.babelrc",
+    "src\/.editorconfig",
+    "src\/.eslintignore",
+    "src\/.eslintrc.js",
+    "src\/.nvmrc",
+    "src\/.postcss.config.js"
+  ],
+  "srcBuildFolderName": "hca-eea-program-roster",
+  "textDomain": "event_espresso",
+  "wpOrgRelease": "4.10.10.p"
+}
