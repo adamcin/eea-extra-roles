@@ -12,10 +12,7 @@
 
     <!-- specific rule exclusions per file -->
     <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
-        <exclude-pattern>hca-eea-program-roster.php</exclude-pattern>
+        <exclude-pattern>eea-extra-roles.php</exclude-pattern>
     </rule>
 
-    <rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
-        <exclude-pattern>EE_Calendar_Config.php</exclude-pattern>
-    </rule>
 </ruleset>

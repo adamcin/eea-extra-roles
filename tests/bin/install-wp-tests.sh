@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 if [ $# -lt 3 ]; then
 	echo "usage: $0 <db-name> <db-user> <db-pass> [db-host] [wp-version]"
 	exit 1
@@ -13,6 +14,28 @@ WP_VERSION=${5-latest}
 
 WP_TESTS_DIR=${WP_TESTS_DIR-/tmp/wordpress-tests-lib}
 WP_CORE_DIR=${WP_CORE_DIR-/tmp/wordpress/}
+
+MYDBARGS=()
+
+if [ "$DB_HOST" == 'localhost:' ]; then
+    DB_SOCK="$(find "${HOME}/Library/Application Support/Local/run" -name 'mysqld.sock' | head -n 1)"
+    if [ ! -S "$DB_SOCK" ]; then
+      echo "No mysqld.sock file found." >&2
+      exit 1
+    fi
+    DB_HOST="localhost:${DB_SOCK}"
+fi
+
+
+
+myCli() {
+    if [ "$1" == "admin" ]; then
+      shift
+      mysqladmin "${MYDBARGS[@]}" "$@"
+    else
+      mysql "${MYDBARGS[@]}" "$@"
+    fi
+}
 
 download() {
     if [ `which curl` ]; then
@@ -75,19 +98,19 @@ install_test_suite() {
 
 	cd $WP_TESTS_DIR
 
-	if [ ! -f wp-tests-config.php ]; then
-		download https://develop.svn.wordpress.org/${WP_TESTS_TAG}/wp-tests-config-sample.php "$WP_TESTS_DIR"/wp-tests-config.php
-		sed $ioption "s:dirname( __FILE__ ) . '/src/':'$WP_CORE_DIR':" "$WP_TESTS_DIR"/wp-tests-config.php
-		sed $ioption "s/youremptytestdbnamehere/$DB_NAME/" "$WP_TESTS_DIR"/wp-tests-config.php
-		sed $ioption "s/yourusernamehere/$DB_USER/" "$WP_TESTS_DIR"/wp-tests-config.php
-		sed $ioption "s/yourpasswordhere/$DB_PASS/" "$WP_TESTS_DIR"/wp-tests-config.php
-		sed $ioption "s|localhost|${DB_HOST}|" "$WP_TESTS_DIR"/wp-tests-config.php
-	fi
+	[ ! -f wp-tests-config.php ] || rm -f wp-tests-config.php
+
+	download https://develop.svn.wordpress.org/${WP_TESTS_TAG}/wp-tests-config-sample.php "$WP_TESTS_DIR"/wp-tests-config.php
+    sed $ioption "s:dirname( __FILE__ ) . '/src/':'$WP_CORE_DIR':" "$WP_TESTS_DIR"/wp-tests-config.php
+    sed $ioption "s/youremptytestdbnamehere/$DB_NAME/" "$WP_TESTS_DIR"/wp-tests-config.php
+    sed $ioption "s/yourusernamehere/$DB_USER/" "$WP_TESTS_DIR"/wp-tests-config.php
+    sed $ioption "s/yourpasswordhere/$DB_PASS/" "$WP_TESTS_DIR"/wp-tests-config.php
+    sed $ioption "s|localhost|${DB_HOST}|" "$WP_TESTS_DIR"/wp-tests-config.php
 
 }
 
-install_db() {
-	# parse DB_HOST for port or socket references
+setup_mycli_dbargs() {
+    # parse DB_HOST for port or socket references
 	local PARTS=(${DB_HOST//\:/ })
 	local DB_HOSTNAME="${PARTS[0]}";
 	local DB_SOCK_OR_PORT="${PARTS[*]:1}";
@@ -103,10 +126,15 @@ install_db() {
 		fi
 	fi
 
-	# create database
-	mysqladmin create $DB_NAME --user="$DB_USER" --password="$DB_PASS" "${EXTRA[@]}"
+	MYDBARGS=(--user="$DB_USER" --password="$DB_PASS" "${EXTRA[@]}")
 }
 
+install_db() {
+	# create database
+	myCli -e "show databases" | grep -q "^${DB_NAME}\$" || myCli admin create "$DB_NAME"
+}
+
+setup_mycli_dbargs
 install_wp
 install_test_suite
 install_db

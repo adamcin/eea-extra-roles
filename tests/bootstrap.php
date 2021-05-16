@@ -1,6 +1,6 @@
 <?php
 /**
- * Bootstrap for hca-eea-program-roster tests
+ * Bootstrap for eea-extra-roles tests
  */
 
 use EETests\bootstrap\AddonLoader;
@@ -13,13 +13,13 @@ if (! is_dir($core_tests_dir)) {
 require $core_tests_dir . 'includes/CoreLoader.php';
 require $core_tests_dir . 'includes/AddonLoader.php';
 
-define('HCA_PROGRAM_ROSTER_PLUGIN_DIR', dirname(dirname(__FILE__)) . '/');
-define('HCA_PROGRAM_ROSTER_TESTS_DIR', HCA_PROGRAM_ROSTER_PLUGIN_DIR . 'tests/');
+define('EE_EXTRA_ROLES_PLUGIN_DIR', dirname(dirname(__FILE__)) . '/');
+define('EE_EXTRA_ROLES_TESTS_DIR', EE_EXTRA_ROLES_PLUGIN_DIR . 'tests/');
 
 
 $addon_loader = new AddonLoader(
-    HCA_PROGRAM_ROSTER_TESTS_DIR,
-    HCA_PROGRAM_ROSTER_PLUGIN_DIR,
-    'hca-eea-program-roster.php'
+    EE_EXTRA_ROLES_TESTS_DIR,
+    EE_EXTRA_ROLES_PLUGIN_DIR,
+    'eea-extra-roles.php'
 );
 $addon_loader->init();

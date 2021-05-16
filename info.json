@@ -1,7 +1,7 @@
 {
-  "versionFile": "hca-eea-program-roster.php",
-  "slug": "hca-eea-program-roster",
-  "name": "HCA Program Roster",
+  "versionFile": "eea-extra-roles.php",
+  "slug": "eea-extra-roles",
+  "name": "Extra Roles for Event Espresso 4",
   "wpi18nJsPotFilePath": ".\/languages\/ee-js.pot",
   "releaseFilesRemove": [
     "src\/tests\/**",
@@ -18,7 +18,7 @@
     "src\/.nvmrc",
     "src\/.postcss.config.js"
   ],
-  "srcBuildFolderName": "hca-eea-program-roster",
+  "srcBuildFolderName": "eea-extra-roles",
   "textDomain": "event_espresso",
   "wpOrgRelease": "4.10.10.p"
 }

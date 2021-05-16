@@ -1,9 +1,9 @@
 <?php
 
 /*
-Plugin Name: HCA Program Roster
-Plugin URI: https://github.com/adamcin/hca-eea-program-roster
-Description: Hoffman Center for the Arts Program Roster add-on for Event Espresso.
+Plugin Name: Extra Roles for Event Espresso
+Plugin URI: https://github.com/adamcin/eea-extra-roles
+Description: Add-on providing additional roles for Event Espresso.
 Version: 1.0
 Author: Mark Adamcin
 Author URI: https://github.com/adamcin
@@ -27,23 +27,31 @@ limitations under the License.
  *
  * Event Registration Listing Portal Plugin for WordPress
  *
- * @ package		HcaProgramRoster
+ * @ package		ExtraRoles
  * @ author			Mark Adamcin
  * @ copyright	    (c) 2021 Mark Adamcin  All Rights Reserved.
  * @ license		https://www.apache.org/licenses/LICENSE-2.0
- * @ link			https://github.com/adamcin/eea-hca-registrations-portal
+ * @ link			https://github.com/adamcin/eea-extra-roles
  * @ version	 	1.0
  *
  * ------------------------------------------------------------------------
 */
 define('EE_CORE_VERSION_REQUIRED', '4.10.10.p');
-define('HCA_PROGRAM_ROSTER_VERSION', '1.0');
-define('HCA_PROGRAM_ROSTER_PLUGIN_FILE', __FILE__);
+define('EE_EXTRA_ROLES_VERSION', '1.0');
+define('EE_EXTRA_ROLES_PLUGIN_FILE', __FILE__);
 
-function load_hca_program_roster_class()
+function eea_extra_roles_deactivation()
+{
+    if (class_exists('EE_ExtraRoles')) {
+        EE_ExtraRoles::deregister_addon();
+    }
+}
+register_deactivation_hook(__FILE__, 'eea_extra_roles_deactivation');
+
+function load_eea_extra_roles_class()
 {
     // check for duplicate copy of HcaProgramRoster addon
-    if (class_exists('EE_Roster')) {
+    if (class_exists('EE_ExtraRoles')) {
         EE_Error::add_error(
             sprintf(
                 __(
@@ -51,49 +59,49 @@ function load_hca_program_roster_class()
                     'event_espresso'
                 ),
                 '<br />',
-                HCA_PROGRAM_ROSTER_VERSION
+                EE_EXTRA_ROLES_VERSION
             ),
             __FILE__,
             __FUNCTION__,
             __LINE__
         );
-        add_action('admin_notices', 'hca_program_roster_activation_error');
+        add_action('admin_notices', 'eea_extra_roles_activation_error');
         return;
     }
     if (class_exists('EE_Addon')) {
-        // hca_program_roster_version
-        require_once(plugin_dir_path(__FILE__) . 'EE_Roster.class.php');
-        EE_Roster::register_addon();
+        // eea_extra_roles_version
+        require_once(plugin_dir_path(__FILE__) . 'EE_ExtraRoles.class.php');
+        EE_ExtraRoles::register_addon();
     } else {
-        add_action('admin_notices', 'hca_program_roster_activation_error');
+        add_action('admin_notices', 'eea_extra_roles_activation_error');
     }
 }
 
-add_action('AHEE__EE_System__load_espresso_addons', 'load_hca_program_roster_class');
+add_action('AHEE__EE_System__load_espresso_addons', 'load_eea_extra_roles_class');
 
-function hca_program_roster_activation_check()
+function eea_extra_roles_activation_check()
 {
     if (! did_action('AHEE__EE_System__load_espresso_addons')) {
-        add_action('admin_notices', 'hca_program_roster_activation_error');
+        add_action('admin_notices', 'eea_extra_roles_activation_error');
     }
 }
 
-add_action('init', 'hca_program_roster_activation_check', 1);
+add_action('init', 'eea_extra_roles_activation_check', 1);
 
-function hca_program_roster_activation_error()
+function eea_extra_roles_activation_error()
 {
     unset($_GET['activate']);
     unset($_REQUEST['activate']);
     if (! function_exists('deactivate_plugins')) {
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');
     }
-    deactivate_plugins(plugin_basename(HCA_PROGRAM_ROSTER_PLUGIN_FILE));
+    deactivate_plugins(plugin_basename(EE_EXTRA_ROLES_PLUGIN_FILE));
     ?>
     <div class="error">
         <p><?php
             printf(
                 __(
-                    'HCA Program Roster Add-on could not be activated. Please ensure that Event Espresso version %s or higher is running',
+                    'Extra Roles Add-on could not be activated. Please ensure that Event Espresso version %s or higher is running',
                     'event_espresso'
                 ),
                 EE_CORE_VERSION_REQUIRED
