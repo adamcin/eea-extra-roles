@@ -43,7 +43,7 @@ define('HCA_PROGRAM_ROSTER_PLUGIN_FILE', __FILE__);
 function load_hca_program_roster_class()
 {
     // check for duplicate copy of HcaProgramRoster addon
-    if (class_exists('HcaProgramRoster_Addon')) {
+    if (class_exists('EE_Roster')) {
         EE_Error::add_error(
             sprintf(
                 __(
@@ -62,8 +62,8 @@ function load_hca_program_roster_class()
     }
     if (class_exists('EE_Addon')) {
         // hca_program_roster_version
-        require_once(plugin_dir_path(__FILE__) . 'HcaProgramRoster_Addon.class.php');
-        HcaProgramRoster_Addon::register_addon();
+        require_once(plugin_dir_path(__FILE__) . 'EE_Roster.class.php');
+        EE_Roster::register_addon();
     } else {
         add_action('admin_notices', 'hca_program_roster_activation_error');
     }

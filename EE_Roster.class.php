@@ -7,14 +7,14 @@ define('HCA_PROGRAM_ROSTER_ADMIN', HCA_PROGRAM_ROSTER_PATH . 'admin' . DS);
 define('HCA_PROGRAM_ROSTER_DMS_PATH', HCA_PROGRAM_ROSTER_PATH . 'data_migration_scripts' . DS);
 
 /**
- * Class  HcaProgramRoster_Addon
+ * Class  EE_Roster
  *
  * @package         HcaProgramRoster
  * @author              Seth Shoultes, Chris Reynolds, Brent Christensen, Michael Nelson
  *
  * ------------------------------------------------------------------------
  */
-class HcaProgramRoster_Addon extends EE_Addon
+class EE_Roster extends EE_Addon
 {
 
 
@@ -38,20 +38,20 @@ class HcaProgramRoster_Addon extends EE_Addon
             'main_file_path' => HCA_PROGRAM_ROSTER_PLUGIN_FILE,
             'admin_path' => HCA_PROGRAM_ROSTER_ADMIN . 'roster' . DS,
             'admin_callback' => 'additional_admin_hooks',
-            'config_class' => 'HcaProgramRoster_Config',
-            'config_name' => 'HcaProgramRoster_Addon',
+            'class_name' => 'EE_Roster',
+            'config_class' => 'EE_Roster_Config',
+            'config_name' => 'EE_Roster',
             'autoloader_paths' => array(
-                'HcaProgramRoster_Addon' => HCA_PROGRAM_ROSTER_PATH . 'HcaProgramRoster_Addon.class.php',
-                'HcaProgramRoster_Config' => HCA_PROGRAM_ROSTER_PATH . 'HcaProgramRoster_Config.php',
-                'EE_Datetime_In_Calendar' => HCA_PROGRAM_ROSTER_PATH . 'EE_Datetime_In_Calendar.class.php',
+                'HcaProgramRoster_Addon' => HCA_PROGRAM_ROSTER_PATH . 'EE_Roster.class.php',
+                'EE_Roster_Config' => HCA_PROGRAM_ROSTER_PATH . 'EE_Roster_Config.php',
                 'Roster_Admin_Page' => HCA_PROGRAM_ROSTER_ADMIN . 'roster' . DS . 'Roster_Admin_Page.core.php',
                 'Roster_Admin_Page_Init' => HCA_PROGRAM_ROSTER_ADMIN .
                     'roster' . DS . 'Roster_Admin_Page_Init.core.php',
             ),
             'dms_paths' => array(HCA_PROGRAM_ROSTER_DMS_PATH),
             'module_paths' => array(HCA_PROGRAM_ROSTER_PATH . 'EED_Roster.module.php'),
-            'shortcode_paths' => array(HCA_PROGRAM_ROSTER_PATH . 'HcaProgramRoster.shortcode.php'),
-            'widget_paths' => array(HCA_PROGRAM_ROSTER_PATH . 'HcaProgramRoster.widget.php'),
+            'shortcode_paths' => array(HCA_PROGRAM_ROSTER_PATH . 'EES_Roster.shortcode.php'),
+            'widget_paths' => array(HCA_PROGRAM_ROSTER_PATH . 'EEW_Roster.widget.php'),
             // if plugin update engine is being used for auto-updates. not needed if PUE is not being used.
             'pue_options' => array(
                 'pue_plugin_slug' => 'hca-eea-program-roster',
@@ -95,5 +95,5 @@ class HcaProgramRoster_Addon extends EE_Addon
         return $links;
     }
 }
-// End of file HcaProgramRoster_Addon.class.php
-// Location: wp-content/plugins/hca-eea-program-roster/HcaProgramRoster_Addon.class.php
+// End of file EE_Roster.class.php
+// Location: wp-content/plugins/hca-eea-program-roster/EE_Roster.class.php

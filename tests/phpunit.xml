@@ -7,7 +7,7 @@
 	convertWarningsToExceptions="true"
 	>
 	<testsuites>
-		<testsuite>
+		<testsuite name="HcaProgramRoster Test Cases">
 			<directory suffix=".php">./testcases/</directory>
 		</testsuite>
 	</testsuites>
