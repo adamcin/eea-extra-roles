@@ -66,6 +66,10 @@ class EE_ExtraRoles extends EE_Addon
                     'ee_read_others_registrations',
                     'ee_edit_registrations',
                     'ee_edit_others_registrations',
+                    'ee_read_messages',
+                    'ee_read_others_messages',
+                    'ee_read_global_messages',
+                    'ee_send_message',
                 )
             ),
             // if plugin update engine is being used for auto-updates. not needed if PUE is not being used.
