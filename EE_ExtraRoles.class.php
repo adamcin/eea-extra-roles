@@ -70,13 +70,13 @@ class EE_ExtraRoles extends EE_Addon
                     'ee_read_others_messages',
                     'ee_read_global_messages',
                     'ee_send_message',
+                    'ee_read_others_checkins',
+                    'ee_read_checkins',
+                    'ee_edit_checkins',
+                    'ee_edit_others_checkins',
+                    'ee_delete_checkins',
+                    'ee_delete_others_checkins'
                 )
-            ),
-            // if plugin update engine is being used for auto-updates. not needed if PUE is not being used.
-            'pue_options' => array(
-                'pue_plugin_slug' => 'eea-extra-roles',
-                'checkPeriod' => '24',
-                'use_wp_update' => false
             )
         ));
     }

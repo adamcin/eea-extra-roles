@@ -36,9 +36,9 @@ limitations under the License.
  *
  * ------------------------------------------------------------------------
 */
-define('EE_CORE_VERSION_REQUIRED', '4.10.10.p');
-define('EE_EXTRA_ROLES_VERSION', '1.0');
-define('EE_EXTRA_ROLES_PLUGIN_FILE', __FILE__);
+const EE_CORE_VERSION_REQUIRED = '4.10.10.p';
+const EE_EXTRA_ROLES_VERSION = '1.0';
+const EE_EXTRA_ROLES_PLUGIN_FILE = __FILE__;
 
 function eea_extra_roles_deactivation()
 {
